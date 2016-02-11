@@ -1,0 +1,62 @@
+{
+  "name": "seating-chart-designer",
+  "version": "0.0.0",
+  "description": "Seating chart designer for small companies, built with React.js",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "webpack -p --config webpack.prod.config.js",
+    "start": "webpack-dev-server --hot --inline",
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtribble/seating-chart-designer.git"
+  },
+  "keywords": [
+    "seating",
+    "chart",
+    "designer",
+    "react",
+    "javascript"
+  ],
+  "author": "Jeff Tribble",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jtribble/seating-chart-designer/issues"
+  },
+  "homepage": "https://github.com/jtribble/seating-chart-designer#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.3.1",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.1.0",
+    "css-loader": "^0.23.1",
+    "eslint": "^1.10.3",
+    "eslint-config-google": "^0.3.0",
+    "eslint-plugin-react": "^3.16.1",
+    "file-loader": "^0.8.5",
+    "history": "^2.0.0-rc2",
+    "immutable": "^3.7.6",
+    "lodash": "^4.2.0",
+    "moment": "^2.11.1",
+    "path": "^0.12.7",
+    "postcss-import": "^8.0.2",
+    "postcss-loader": "^0.8.0",
+    "precss": "^1.4.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.2.1",
+    "react-router": "^2.0.0-rc5",
+    "redux": "^3.2.1",
+    "redux-api-middleware": "^1.0.0-beta3",
+    "redux-immutablejs": "0.0.8",
+    "redux-logger": "^2.4.0",
+    "redux-promise": "^0.5.1",
+    "redux-thunk": "^1.0.3",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.12",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
