@@ -1,6 +1,8 @@
 import {fromJS} from 'immutable';
-import initialState from '../store/initial_state';
+import _ from 'lodash';
+
 import {setSpotType} from '../models/spot';
+import initialState from '../store/initial_state';
 
 /**
  * Reducer for the "design" portion of state
@@ -34,17 +36,21 @@ export default designReducer;
 function modifySpot(state, action) {
   let nextState = state.toJS();
   let {newType, spotId} = action.payload;
-  let spot;
-  outer: for (let i = 0; i < nextState.spots.length; i++) { // eslint-disable-line no-labels
-    for (let j = 0; j < nextState.spots[i].length; j++) {
-      if (nextState.spots[i][j].id === spotId) {
-        spot = nextState.spots[i][j];
-        break outer; // eslint-disable-line no-labels
-      }
-    }
-  }
+  const spot = _.get(nextState.spots, [spotId.row, spotId.col]);
+  // outer: for (let i = 0; i < nextState.spots.length; i++) { // eslint-disable-line no-labels
+  //   for (let j = 0; j < nextState.spots[i].length; j++) {
+  //     if (nextState.spots[i][j].id === spotId) {
+  //       spot = nextState.spots[i][j];
+  //       break outer; // eslint-disable-line no-labels
+  //     }
+  //   }
+  // }
   if (spot) {
-    setSpotType(spot, newType);
+    if (spot.type.id === 'WALL') {
+      spot.isPresent = !spot.isPresent;
+    } else {
+      setSpotType(spot, newType);
+    }
   }
   return fromJS(nextState);
 }

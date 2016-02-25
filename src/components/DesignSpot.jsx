@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 const DesignSpot = React.createClass({
   propTypes: {
@@ -8,8 +9,17 @@ const DesignSpot = React.createClass({
 
   render: function() {
     let {onSpotClick, spot} = this.props;
+    let classes = 'design-spot';
+    if (spot.isPresent) {
+      classes += ' is-present';
+    }
     return (
-      <div className="design-spot" onClick={onSpotClick}>
+      <div
+        className={classes}
+        data-orientation={_.get(spot, ['type', 'orientation', 'id'])}
+        data-type={spot.type.id}
+        onClick={spot.type.id === 'INVISIBLE' ? undefined : onSpotClick}
+      >
         {spot.type.icon ? (
           <i className="material-icons" style={{color: spot.type.color}}>
             {spot.type.icon}

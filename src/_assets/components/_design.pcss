@@ -113,6 +113,7 @@
 }
 
 $designSpotSize: 75px;
+$designWallSize: 8px;
 
 .design-spot {
   box-shadow: 0 0 1px $grey-lighten-1 inset;
@@ -126,4 +127,31 @@ $designSpotSize: 75px;
 .design-spot .material-icons {
   font-size: 2.5rem;
   line-height: $designSpotSize;
+}
+
+.design-spot[data-type="INVISIBLE"] {
+  background-color: $grey-lighten-4;
+  height: $designWallSize;
+  width: $designWallSize;
+}
+
+.design-spot[data-type="WALL"] {
+  background-color: $grey-lighten-4;
+  transition: .15s background-color;
+}
+
+.design-spot[data-type="WALL"]:not(.is-present):hover {
+  background-color: $grey-lighten-1;
+}
+
+.design-spot[data-type="WALL"].is-present {
+  background-color: $blue-grey-base;
+}
+
+.design-spot[data-type="WALL"][data-orientation="VERTICAL"] {
+  width: $designWallSize;
+}
+
+.design-spot[data-type="WALL"][data-orientation="HORIZONTAL"] {
+  height: $designWallSize;
 }

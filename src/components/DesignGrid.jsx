@@ -14,6 +14,8 @@ const DesignGrid = React.createClass({
 
   render: function() {
     const {spots, zoom} = this.props;
+    const gridHeight = Math.ceil(spots.length / 2) * 75 + Math.floor(spots.length / 2) * 8;
+    const gridWidth = Math.ceil(spots[0].length / 2) * 75 + Math.floor(spots[0].length / 2) * 8;
     let rowKey = 0;
     return (
       <div
@@ -28,15 +30,15 @@ const DesignGrid = React.createClass({
           className="design-grid clearfix"
           data-zoom={zoom}
           style={{
-            height: spots.length * 75 + 'px',
-            width: spots[0].length * 75 + 'px'
+            height: gridHeight + 'px',
+            width: gridWidth + 'px'
           }}
         >
           {spots.map(row => (
             <div className="design-grid-row" key={`grid-row-${rowKey++}`}>
               {row.map(col => (
                 <DesignSpot
-                  key={col.id}
+                  key={col.id.str}
                   onSpotClick={() => this.handleSpotClick(col.id)}
                   spot={col}
                 />
