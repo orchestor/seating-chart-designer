@@ -1,6 +1,29 @@
 import React from 'react';
 import DesignSpot from './DesignSpot';
 
+const spotSizes = {
+  1: {
+    spot: 55,
+    wall: 6
+  },
+  2: {
+    spot: 65,
+    wall: 7
+  },
+  3: {
+    spot: 75,
+    wall: 8
+  },
+  4: {
+    spot: 85,
+    wall: 9
+  },
+  5: {
+    spot: 95,
+    wall: 10
+  }
+};
+
 const DesignGrid = React.createClass({
   propTypes: {
     onSpotClick: React.PropTypes.func.isRequired,
@@ -14,8 +37,14 @@ const DesignGrid = React.createClass({
 
   render: function() {
     const {spots, zoom} = this.props;
-    const gridHeight = Math.ceil(spots.length / 2) * 75 + Math.floor(spots.length / 2) * 8;
-    const gridWidth = Math.ceil(spots[0].length / 2) * 75 + Math.floor(spots[0].length / 2) * 8;
+    const gridHeight = (
+      Math.ceil(spots.length / 2) * spotSizes[zoom].spot +
+      Math.floor(spots.length / 2) * spotSizes[zoom].wall
+    );
+    const gridWidth = (
+      Math.ceil(spots[0].length / 2) * spotSizes[zoom].spot +
+      Math.floor(spots[0].length / 2) * spotSizes[zoom].wall
+    );
     let rowKey = 0;
     return (
       <div

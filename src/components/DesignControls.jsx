@@ -6,7 +6,8 @@ import {spotTypes} from '../models/spot';
 const DesignControls = React.createClass({
   propTypes: {
     activeType: React.PropTypes.object.isRequired,
-    onControlClick: React.PropTypes.func.isRequired
+    onControlClick: React.PropTypes.func.isRequired,
+    onJsonClick: React.PropTypes.func.isRequired
   },
 
   getInitialState: function() {
@@ -16,7 +17,7 @@ const DesignControls = React.createClass({
   },
 
   render: function() {
-    let {activeType, onControlClick} = this.props;
+    let {activeType, onControlClick, onJsonClick} = this.props;
     return (
       <div className="design-controls">
         <ul>
@@ -34,7 +35,10 @@ const DesignControls = React.createClass({
             </a>
           </li>
           <li>
-            <a className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2">
+            <a
+              className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2"
+              onClick={onJsonClick}
+            >
               {'JSON'}
             </a>
           </li>

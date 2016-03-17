@@ -36,8 +36,8 @@ export const spotTypes = {
     icon: 'desktop_mac',
     id: 'DESK'
   },
-  INVISIBLE: {
-    id: 'INVISIBLE'
+  JUNCTION: {
+    id: 'JUNCTION'
   },
   EMPTY: {
     id: 'EMPTY'
@@ -89,7 +89,7 @@ export function initSpots(rows, cols) {
         if (j % 2 === 0) {
           spots[i][j] = createSpot(i, j, 'WALL', 'HORIZONTAL');
         } else {
-          spots[i][j] = createSpot(i, j, 'INVISIBLE');
+          spots[i][j] = createSpot(i, j, 'JUNCTION');
         }
       }
     }

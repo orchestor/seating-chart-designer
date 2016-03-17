@@ -15,6 +15,14 @@ const DesignCanvas = React.createClass({
     zoom: React.PropTypes.number.isRequired
   },
 
+  handleJsonClick: function(e) {
+    e.preventDefault();
+    window.prompt(
+      'Copy to clipboard: Ctrl+C, Enter',
+      JSON.stringify(this.props.spots)
+    );
+  },
+
   render: function() {
     let {activeType, dispatch, name, spots, zoom} = this.props;
     return (
@@ -23,6 +31,7 @@ const DesignCanvas = React.createClass({
           <DesignControls
             activeType={activeType}
             onControlClick={type => dispatch(setActiveType(type))}
+            onJsonClick={this.handleJsonClick}
           />
         </div>
         <div className="design-right">

@@ -87,13 +87,13 @@
   padding-left: 1.5rem;
 }
 
-.design-name > input[type="text"],
-.design-name > input[type="text"]:focus {
+.design-heading input[type="text"],
+.design-heading input[type="text"]:focus {
   border: 0;
   box-shadow: none;
 }
 
-.design-name > input[type="text"] {
+.design-heading input[type="text"] {
   color: $white;
   display: inline-block;
   font-size: 2.1rem;
@@ -108,31 +108,26 @@
 
 /* grid */
 
+.design-grid-container {
+  background-color: $grey-lighten-5;
+}
+
 .design-grid-row {
   clear: both;
 }
 
-$designSpotSize: 75px;
-$designWallSize: 8px;
+/* design spot */
 
 .design-spot {
+  background-color: $white;
   box-shadow: 0 0 1px $grey-lighten-1 inset;
   cursor: pointer;
   float: left;
-  height: $designSpotSize;
   text-align: center;
-  width: $designSpotSize;
 }
 
-.design-spot .material-icons {
-  font-size: 2.5rem;
-  line-height: $designSpotSize;
-}
-
-.design-spot[data-type="INVISIBLE"] {
+.design-spot[data-type="JUNCTION"] {
   background-color: $grey-lighten-4;
-  height: $designWallSize;
-  width: $designWallSize;
 }
 
 .design-spot[data-type="WALL"] {
@@ -148,10 +143,127 @@ $designWallSize: 8px;
   background-color: $blue-grey-base;
 }
 
-.design-spot[data-type="WALL"][data-orientation="VERTICAL"] {
-  width: $designWallSize;
+/* spot size - 1 */
+
+$designFontSize--1: 2.3rem;
+$designSpotSize--1: 55px;
+$designWallSize--1: 6px;
+
+.design-grid[data-zoom="1"] .design-spot {
+  height: $designSpotSize--1;
+  width: $designSpotSize--1;
+}
+.design-grid[data-zoom="1"] .design-spot .material-icons {
+  font-size: 2.5rem;
+  line-height: $designSpotSize--1;
+}
+.design-grid[data-zoom="1"] .design-spot[data-type="JUNCTION"] {
+  height: $designWallSize--1;
+  width: $designWallSize--1;
+}
+.design-grid[data-zoom="1"] .design-spot[data-type="WALL"][data-orientation="VERTICAL"] {
+  width: $designWallSize--1;
+}
+.design-grid[data-zoom="1"] .design-spot[data-type="WALL"][data-orientation="HORIZONTAL"] {
+  height: $designWallSize--1;
 }
 
-.design-spot[data-type="WALL"][data-orientation="HORIZONTAL"] {
-  height: $designWallSize;
+/* spot size - 2 */
+
+$designFontSize--2: 2.4rem;
+$designSpotSize--2: 65px;
+$designWallSize--2: 7px;
+
+.design-grid[data-zoom="2"] .design-spot {
+  height: $designSpotSize--2;
+  width: $designSpotSize--2;
+}
+.design-grid[data-zoom="2"] .design-spot .material-icons {
+  font-size: 2.5rem;
+  line-height: $designSpotSize--2;
+}
+.design-grid[data-zoom="2"] .design-spot[data-type="JUNCTION"] {
+  height: $designWallSize--2;
+  width: $designWallSize--2;
+}
+.design-grid[data-zoom="2"] .design-spot[data-type="WALL"][data-orientation="VERTICAL"] {
+  width: $designWallSize--2;
+}
+.design-grid[data-zoom="2"] .design-spot[data-type="WALL"][data-orientation="HORIZONTAL"] {
+  height: $designWallSize--2;
+}
+
+/* spot size - 3 */
+
+$designFontSize--3: 2.5rem;
+$designSpotSize--3: 75px;
+$designWallSize--3: 8px;
+
+.design-grid[data-zoom="3"] .design-spot {
+  height: $designSpotSize--3;
+  width: $designSpotSize--3;
+}
+.design-grid[data-zoom="3"] .design-spot .material-icons {
+  font-size: 2.5rem;
+  line-height: $designSpotSize--3;
+}
+.design-grid[data-zoom="3"] .design-spot[data-type="JUNCTION"] {
+  height: $designWallSize--3;
+  width: $designWallSize--3;
+}
+.design-grid[data-zoom="3"] .design-spot[data-type="WALL"][data-orientation="VERTICAL"] {
+  width: $designWallSize--3;
+}
+.design-grid[data-zoom="3"] .design-spot[data-type="WALL"][data-orientation="HORIZONTAL"] {
+  height: $designWallSize--3;
+}
+
+/* spot size - 4 */
+
+$designFontSize--4: 2.6rem;
+$designSpotSize--4: 85px;
+$designWallSize--4: 9px;
+
+.design-grid[data-zoom="4"] .design-spot {
+  height: $designSpotSize--4;
+  width: $designSpotSize--4;
+}
+.design-grid[data-zoom="4"] .design-spot .material-icons {
+  font-size: 2.5rem;
+  line-height: $designSpotSize--4;
+}
+.design-grid[data-zoom="4"] .design-spot[data-type="JUNCTION"] {
+  height: $designWallSize--4;
+  width: $designWallSize--4;
+}
+.design-grid[data-zoom="4"] .design-spot[data-type="WALL"][data-orientation="VERTICAL"] {
+  width: $designWallSize--4;
+}
+.design-grid[data-zoom="4"] .design-spot[data-type="WALL"][data-orientation="HORIZONTAL"] {
+  height: $designWallSize--4;
+}
+
+/* spot size - 5 */
+
+$designFontSize--5: 2.7rem;
+$designSpotSize--5: 95px;
+$designWallSize--5: 10px;
+
+.design-grid[data-zoom="5"] .design-spot {
+  height: $designSpotSize--5;
+  width: $designSpotSize--5;
+}
+.design-grid[data-zoom="5"] .design-spot .material-icons {
+  font-size: 2.5rem;
+  line-height: $designSpotSize--5;
+}
+.design-grid[data-zoom="5"] .design-spot[data-type="JUNCTION"] {
+  height: $designWallSize--5;
+  width: $designWallSize--5;
+}
+.design-grid[data-zoom="5"] .design-spot[data-type="WALL"][data-orientation="VERTICAL"] {
+  width: $designWallSize--5;
+}
+.design-grid[data-zoom="5"] .design-spot[data-type="WALL"][data-orientation="HORIZONTAL"] {
+  height: $designWallSize--5;
 }

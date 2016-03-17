@@ -18,7 +18,7 @@ const DesignSpot = React.createClass({
         className={classes}
         data-orientation={_.get(spot, ['type', 'orientation', 'id'])}
         data-type={spot.type.id}
-        onClick={spot.type.id === 'INVISIBLE' ? undefined : onSpotClick}
+        onClick={spot.type.id === 'JUNCTION' ? undefined : onSpotClick}
       >
         {spot.type.icon ? (
           <i className="material-icons" style={{color: spot.type.color}}>
