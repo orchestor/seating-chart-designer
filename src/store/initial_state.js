@@ -1,8 +1,8 @@
 import {fromJS} from 'immutable';
 import {initSpots, spotTypes} from '../models/spot';
 
-const defaultRows = 10;
-const defaultCols = 25;
+export const defaultRows = 5;
+export const defaultCols = 8;
 
 const initialState = fromJS({
   design: {

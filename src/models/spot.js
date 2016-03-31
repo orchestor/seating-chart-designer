@@ -18,12 +18,12 @@ export const wallOrientations = {
  * @var {object} spotTypes - A map of spot types
  */
 export const spotTypes = {
-  AC_UNIT: {
-    color: '#546e7a',
-    desc: 'AC Unit',
-    icon: 'ac_unit',
-    id: 'AC_UNIT'
-  },
+  // AC_UNIT: {
+  //   color: '#546e7a',
+  //   desc: 'AC Unit',
+  //   icon: 'ac_unit',
+  //   id: 'AC_UNIT'
+  // },
   CONFERENCE: {
     color: '#546e7a',
     desc: 'Conference',
@@ -70,27 +70,31 @@ export const spotTypes = {
  * @param {number} cols - The x axis
  * @return {number} - The two-dimensional array
  */
-export function initSpots(rows, cols) {
+export function initSpots(rows, cols, existingSpots = [[]]) {
   let spots = [];
   for (let i = 0; i < (2 * rows - 1); i++) {
     spots[i] = [];
     // spot row with walls in between
     if (i % 2 === 0) {
       for (let j = 0; (j < 2 * cols - 1); j++) {
+        let defaultSpot;
         if (j % 2 === 0) {
-          spots[i][j] = createSpot(i, j, 'EMPTY');
+          defaultSpot = createSpot(i, j, 'EMPTY');
         } else {
-          spots[i][j] = createSpot(i, j, 'WALL', 'VERTICAL');
+          defaultSpot = createSpot(i, j, 'WALL', 'VERTICAL');
         }
+        spots[i][j] = _.has(existingSpots, [i, j]) ? existingSpots[i][j] : defaultSpot;
       }
     // wall-only row (empty spots in between)
     } else {
       for (let j = 0; (j < 2 * cols - 1); j++) {
+        let defaultSpot;
         if (j % 2 === 0) {
-          spots[i][j] = createSpot(i, j, 'WALL', 'HORIZONTAL');
+          defaultSpot = createSpot(i, j, 'WALL', 'HORIZONTAL');
         } else {
-          spots[i][j] = createSpot(i, j, 'JUNCTION');
+          defaultSpot = createSpot(i, j, 'JUNCTION');
         }
+        spots[i][j] = _.has(existingSpots, [i, j]) ? existingSpots[i][j] : defaultSpot;
       }
     }
   }

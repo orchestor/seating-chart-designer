@@ -6,12 +6,6 @@ const DesignName = React.createClass({
     onNameChange: React.PropTypes.func.isRequired
   },
 
-  componentWillReceiveProps: function() {
-    this.setState({
-      value: this.props.name
-    });
-  },
-
   render: function() {
     const {name, onNameChange} = this.props;
     return (

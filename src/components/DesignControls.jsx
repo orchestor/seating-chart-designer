@@ -23,13 +23,13 @@ const DesignControls = React.createClass({
         <ul>
           {flatten(spotTypes).filter(t => t.icon).map(spotType => (
             <DesignControl
-              spotType={spotType}
               isActive={activeType.id === spotType.id}
               key={spotType.id}
               onControlClick={() => onControlClick(spotType)}
+              spotType={spotType}
             />
           ))}
-          <li>
+          <li style={{marginTop: '25px'}}>
             <a className="waves-effect waves-light btn light-blue">
               {'Save'}
             </a>

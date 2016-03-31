@@ -1,17 +1,24 @@
 import React from 'react';
+import DesignAxis from './DesignAxis';
 import DesignName from './DesignName';
+import {defaultCols, defaultRows} from '../store/initial_state';
 
 const DesignHeading = React.createClass({
   propTypes: {
+    cols: React.PropTypes.number.isRequired,
     name: React.PropTypes.string,
+    onColsChange: React.PropTypes.func.isRequired,
     onNameChange: React.PropTypes.func.isRequired,
+    onRowsChange: React.PropTypes.func.isRequired,
     onZoomIn: React.PropTypes.func.isRequired,
     onZoomOut: React.PropTypes.func.isRequired,
+    rows: React.PropTypes.number.isRequired,
     zoom: React.PropTypes.number.isRequired
   },
 
   render: function() {
-    const {name, onNameChange, onZoomIn, onZoomOut, zoom} = this.props;
+    const {cols, name, onNameChange, onColsChange, onRowsChange,
+      onZoomIn, onZoomOut, rows, zoom} = this.props;
     const isSmallestZoom = zoom === 1;
     const isLargestZoom = zoom === 5;
     return (
@@ -29,35 +36,22 @@ const DesignHeading = React.createClass({
                 <i className="material-icons">{'zoom_in'}</i>
               </a>
             </li>
-            {
-              /*
-              <li>
-                <label>
-                  <input
-                    type="text"
-                  />
-                  {'Rows'}
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input
-                    type="text"
-                  />
-                  {'Columns'}
-                </label>
-              </li>
-              */
-            }
-            {
-              /*
-              <li>
-                <a href="#!" onClick={onZoomIn}>
-                  <i className="material-icons">{'settings'}</i>
-                </a>
-              </li>
-              */
-            }
+            <li>
+              <DesignAxis
+                defaultValue={defaultRows}
+                desc="rows"
+                onAxisChange={onRowsChange}
+                value={rows}
+              />
+            </li>
+            <li>
+              <DesignAxis
+                defaultValue={defaultCols}
+                desc="columns"
+                onAxisChange={onColsChange}
+                value={cols}
+              />
+            </li>
           </ul>
         </div>
       </nav>

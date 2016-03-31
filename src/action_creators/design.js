@@ -16,15 +16,17 @@ export function modifySpot(spotId, newType) {
 }
 
 /**
- * Set design dimensions
+ * Set design cols
  *
- * @param {object} payload - The new dimensions (cols/rows)
+ * @param {object} cols - The new cols
  * @return {object} - The action object
  */
-export function setDimensions(payload) {
+export function setCols(cols) {
   return {
     type: 'SET_DIMENSIONS',
-    payload
+    payload: {
+      cols
+    }
   };
 }
 
@@ -39,6 +41,21 @@ export function setName(name) {
     type: 'SET_NAME',
     payload: {
       name
+    }
+  };
+}
+
+/**
+ * Set design rows
+ *
+ * @param {object} rows - The new rows
+ * @return {object} - The action object
+ */
+export function setRows(rows) {
+  return {
+    type: 'SET_DIMENSIONS',
+    payload: {
+      rows
     }
   };
 }

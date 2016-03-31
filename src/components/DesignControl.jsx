@@ -8,8 +8,13 @@ const DesignControl = ({isActive, onControlClick, spotType}) => {
     onControlClick(spotType);
   };
 
+  let classes = 'design-control';
+  if (isActive) {
+    classes += ' is-active';
+  }
+
   return (
-    <li className={isActive ? 'design-control is-active' : 'design-control'}>
+    <li className={classes}>
       <a className={btnClasses} onClick={handleClick}>
         <i className="material-icons">{spotType.icon}</i>
       </a>

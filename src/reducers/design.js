@@ -1,7 +1,7 @@
 import {fromJS} from 'immutable';
 import _ from 'lodash';
 
-import {setSpotType} from '../models/spot';
+import {initSpots, setSpotType} from '../models/spot';
 import initialState from '../store/initial_state';
 
 /**
@@ -70,6 +70,7 @@ function setDimensions(state, action) {
   if (action.payload.rows) {
     nextState.rows = action.payload.rows;
   }
+  nextState.spots = initSpots(nextState.rows, nextState.cols, nextState.spots);
   return fromJS(nextState);
 }
 

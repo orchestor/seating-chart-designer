@@ -3,14 +3,16 @@ import {connect} from 'react-redux';
 import DesignControls from '../components/DesignControls';
 import DesignGrid from '../components/DesignGrid';
 import DesignHeading from '../components/DesignHeading';
-import {modifySpot, setName} from '../action_creators/design';
+import {modifySpot, setCols, setName, setRows} from '../action_creators/design';
 import {setActiveType, zoomIn, zoomOut} from '../action_creators/settings';
 
 const DesignCanvas = React.createClass({
   propTypes: {
     activeType: React.PropTypes.object.isRequired,
+    cols: React.PropTypes.number.isRequired,
     dispatch: React.PropTypes.func.isRequired,
     name: React.PropTypes.string,
+    rows: React.PropTypes.number.isRequired,
     spots: React.PropTypes.array.isRequired,
     zoom: React.PropTypes.number.isRequired
   },
@@ -24,7 +26,7 @@ const DesignCanvas = React.createClass({
   },
 
   render: function() {
-    let {activeType, dispatch, name, spots, zoom} = this.props;
+    const {activeType, cols, dispatch, name, rows, spots, zoom} = this.props;
     return (
       <div className="design">
         <div className="design-left">
@@ -36,10 +38,14 @@ const DesignCanvas = React.createClass({
         </div>
         <div className="design-right">
           <DesignHeading
+            cols={cols}
             name={name}
+            onColsChange={val => dispatch(setCols(val))}
             onNameChange={val => dispatch(setName(val))}
+            onRowsChange={val => dispatch(setRows(val))}
             onZoomIn={() => dispatch(zoomIn())}
             onZoomOut={() => dispatch(zoomOut())}
+            rows={rows}
             zoom={zoom}
           />
           <DesignGrid
@@ -62,7 +68,9 @@ const DesignCanvas = React.createClass({
 function mapStateToProps(state) {
   return {
     activeType: state.getIn(['settings', 'activeType']).toJS(),
+    cols: state.getIn(['design', 'cols']),
     name: state.getIn(['design', 'name']),
+    rows: state.getIn(['design', 'rows']),
     spots: state.getIn(['design', 'spots']).toJS(),
     zoom: state.getIn(['settings', 'zoom'])
   };
