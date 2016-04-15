@@ -6,7 +6,7 @@ export const defaultRows = 8;
 export const defaultCols = 14;
 
 const currDesign = _.get(window, ['ISC', 'initialState', 'design']);
-const readOnly = _.get(window, ['ISC', 'initialState', 'readOnly']);
+const readOnly = _.get(window, ['ISC', 'initialState', 'settings', 'readOnly']);
 
 const initialDesign = () => {
   if (currDesign) {
