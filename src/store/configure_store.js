@@ -6,15 +6,18 @@ import createLogger from 'redux-logger';
 import reducer from '../reducers/index';
 
 // define application middleware
-let middleware = [
+const middleware = [
   thunkMiddleware,
   apiMiddleware,
-  promiseMiddleware,
-  createLogger({
+  promiseMiddleware
+];
+
+if (!window.ISC) {
+  middleware.push(createLogger({
     // log as plain JS, not Immutable.Map
     stateTransformer: state => state.toJS()
-  })
-];
+  }));
+}
 
 /**
  * Configure store with initial state

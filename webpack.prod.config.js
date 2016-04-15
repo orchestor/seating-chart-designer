@@ -1,8 +1,9 @@
 var autoprefixer = require('autoprefixer');
 var path = require('path');
 var atImport = require('postcss-import');
+var colorFunction = require('postcss-color-function');
 var precss = require('precss');
-// var webpack = require('webpack');
+var webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -12,7 +13,17 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loaders: ['babel']
+      loader: 'babel',
+      query: {
+        plugins: [
+          'lodash',
+          'transform-object-rest-spread'
+        ],
+        presets: [
+          'es2015',
+          'react'
+        ]
+      }
     }, {
       test: /\.p?css$/,
       loaders: ['style', 'css', 'postcss']
@@ -21,15 +32,21 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '',
-    filename: 'bundle.js'
+    filename: 'designer.js'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })
+  ],
   postcss: function(webpack) {
     return [
       atImport({
         addDependencyTo: webpack
       }),
       autoprefixer,
-      precss
+      precss,
+      colorFunction
     ];
   },
   resolve: {

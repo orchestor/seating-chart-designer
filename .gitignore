@@ -3,5 +3,6 @@
 npm-debug.log
 node_modules
 
-# ignore bundle.js
-dist/bundle.js
+# ignore dist except for certain files
+dist/*
+!dist/index.html

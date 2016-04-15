@@ -7,7 +7,8 @@ const DesignControls = React.createClass({
   propTypes: {
     activeType: React.PropTypes.object.isRequired,
     onControlClick: React.PropTypes.func.isRequired,
-    onJsonClick: React.PropTypes.func.isRequired
+    onDoneClick: React.PropTypes.func.isRequired,
+    onSaveClick: React.PropTypes.func.isRequired
   },
 
   getInitialState: function() {
@@ -17,7 +18,7 @@ const DesignControls = React.createClass({
   },
 
   render: function() {
-    let {activeType, onControlClick, onJsonClick} = this.props;
+    const {activeType, onControlClick, onDoneClick, onSaveClick} = this.props;
     return (
       <div className="design-controls">
         <ul>
@@ -30,17 +31,16 @@ const DesignControls = React.createClass({
             />
           ))}
           <li style={{marginTop: '25px'}}>
-            <a className="waves-effect waves-light btn light-blue">
-              {'Save'}
-            </a>
+            <a
+              className="waves-effect waves-light btn light-blue"
+              onClick={onSaveClick}
+            >{'Save'}</a>
           </li>
           <li>
             <a
               className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2"
-              onClick={onJsonClick}
-            >
-              {'JSON'}
-            </a>
+              onClick={onDoneClick}
+            >{'Done'}</a>
           </li>
         </ul>
       </div>

@@ -5,6 +5,7 @@ import DesignGrid from '../components/DesignGrid';
 import DesignHeading from '../components/DesignHeading';
 import {modifySpot, setCols, setName, setRows} from '../action_creators/design';
 import {setActiveType, zoomIn, zoomOut} from '../action_creators/settings';
+import _ from 'lodash';
 
 const DesignCanvas = React.createClass({
   propTypes: {
@@ -17,12 +18,22 @@ const DesignCanvas = React.createClass({
     zoom: React.PropTypes.number.isRequired
   },
 
-  handleJsonClick: function(e) {
+  handleDoneClick: function(e) {
     e.preventDefault();
-    window.prompt(
-      'Copy to clipboard: Ctrl+C, Enter',
-      JSON.stringify(this.props.spots)
-    );
+    if (_.has(window, ['ISC', 'onDone'])) {
+      return window.ISC.onDone();
+    }
+    console.log('window.ISC.onDone()');
+  },
+
+  handleSaveClick: function(e) {
+    e.preventDefault();
+    const {cols, name, rows, spots} = this.props;
+    const newDesign = {cols, name, rows, spots};
+    if (_.has(window, ['ISC', 'onSave'])) {
+      return window.ISC.onSave(newDesign);
+    }
+    console.log('window.ISC.onSave(newDesign)', newDesign);
   },
 
   render: function() {
@@ -33,16 +44,17 @@ const DesignCanvas = React.createClass({
           <DesignControls
             activeType={activeType}
             onControlClick={type => dispatch(setActiveType(type))}
-            onJsonClick={this.handleJsonClick}
+            onDoneClick={this.handleDoneClick}
+            onSaveClick={this.handleSaveClick}
           />
         </div>
         <div className="design-right">
           <DesignHeading
             cols={cols}
             name={name}
-            onColsChange={val => dispatch(setCols(val))}
+            onColsChange={val => dispatch(setCols(parseInt(val, 10)))}
             onNameChange={val => dispatch(setName(val))}
-            onRowsChange={val => dispatch(setRows(val))}
+            onRowsChange={val => dispatch(setRows(parseInt(val, 10)))}
             onZoomIn={() => dispatch(zoomIn())}
             onZoomOut={() => dispatch(zoomOut())}
             rows={rows}
