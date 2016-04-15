@@ -26,6 +26,14 @@ const DesignCanvas = React.createClass({
     console.log('window.ISC.onDone()');
   },
 
+  handleExitClick: function(e) {
+    e.preventDefault();
+    if (_.has(window, ['ISC', 'onExit'])) {
+      return window.ISC.onExit();
+    }
+    console.log('window.ISC.onExit()');
+  },
+
   handleSaveClick: function(e) {
     e.preventDefault();
     const {cols, name, rows, spots} = this.props;
@@ -42,14 +50,14 @@ const DesignCanvas = React.createClass({
     return (
       <div className="design">
         <div className="design-left">
-          {readOnly ? null : (
-            <DesignControls
-              activeType={activeType}
-              onControlClick={type => dispatch(setActiveType(type))}
-              onDoneClick={this.handleDoneClick}
-              onSaveClick={this.handleSaveClick}
-            />
-          )}
+          <DesignControls
+            activeType={activeType}
+            onControlClick={type => dispatch(setActiveType(type))}
+            onDoneClick={this.handleDoneClick}
+            onExitClick={this.handleExitClick}
+            onSaveClick={this.handleSaveClick}
+            readOnly={readOnly}
+          />
         </div>
         <div className="design-right">
           <DesignHeading

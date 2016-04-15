@@ -8,7 +8,9 @@ const DesignControls = React.createClass({
     activeType: React.PropTypes.object.isRequired,
     onControlClick: React.PropTypes.func.isRequired,
     onDoneClick: React.PropTypes.func.isRequired,
-    onSaveClick: React.PropTypes.func.isRequired
+    onExitClick: React.PropTypes.func.isRequired,
+    onSaveClick: React.PropTypes.func.isRequired,
+    readOnly: React.PropTypes.bool.isRequired
   },
 
   getInitialState: function() {
@@ -18,31 +20,42 @@ const DesignControls = React.createClass({
   },
 
   render: function() {
-    const {activeType, onControlClick, onDoneClick, onSaveClick} = this.props;
+    const {activeType, onControlClick, onDoneClick, onExitClick, onSaveClick, readOnly} = this.props;
     return (
       <div className="design-controls">
-        <ul>
-          {flatten(spotTypes).filter(t => t.icon).map(spotType => (
-            <DesignControl
-              isActive={activeType.id === spotType.id}
-              key={spotType.id}
-              onControlClick={() => onControlClick(spotType)}
-              spotType={spotType}
-            />
-          ))}
-          <li style={{marginTop: '25px'}}>
-            <a
-              className="waves-effect waves-light btn light-blue"
-              onClick={onSaveClick}
-            >{'Save'}</a>
-          </li>
-          <li>
-            <a
-              className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2"
-              onClick={onDoneClick}
-            >{'Done'}</a>
-          </li>
-        </ul>
+        {readOnly ? (
+          <ul>
+            <li>
+              <a
+                className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2"
+                onClick={onExitClick}
+              >{'Exit'}</a>
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            {flatten(spotTypes).filter(t => t.icon).map(spotType => (
+              <DesignControl
+                isActive={activeType.id === spotType.id}
+                key={spotType.id}
+                onControlClick={() => onControlClick(spotType)}
+                spotType={spotType}
+              />
+            ))}
+            <li style={{marginTop: '25px'}}>
+              <a
+                className="waves-effect waves-light btn light-blue"
+                onClick={onSaveClick}
+              >{'Save'}</a>
+            </li>
+            <li>
+              <a
+                className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2"
+                onClick={onDoneClick}
+              >{'Done'}</a>
+            </li>
+          </ul>
+        )}
       </div>
     );
   }
