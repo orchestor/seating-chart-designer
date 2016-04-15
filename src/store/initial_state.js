@@ -6,6 +6,7 @@ export const defaultRows = 8;
 export const defaultCols = 14;
 
 const currDesign = _.get(window, ['ISC', 'initialState', 'design']);
+const readOnly = _.get(window, ['ISC', 'initialState', 'readOnly']);
 
 const initialDesign = () => {
   if (currDesign) {
@@ -26,6 +27,7 @@ const initialState = fromJS({
   design: initialDesign(),
   settings: {
     activeType: spotTypes.DESK,
+    readOnly: readOnly === undefined ? false : readOnly,
     zoom: 3
   }
 });

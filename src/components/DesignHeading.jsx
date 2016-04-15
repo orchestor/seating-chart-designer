@@ -12,19 +12,20 @@ const DesignHeading = React.createClass({
     onRowsChange: React.PropTypes.func.isRequired,
     onZoomIn: React.PropTypes.func.isRequired,
     onZoomOut: React.PropTypes.func.isRequired,
+    readOnly: React.PropTypes.bool.isRequired,
     rows: React.PropTypes.number.isRequired,
     zoom: React.PropTypes.number.isRequired
   },
 
   render: function() {
     const {cols, name, onNameChange, onColsChange, onRowsChange,
-      onZoomIn, onZoomOut, rows, zoom} = this.props;
+      onZoomIn, onZoomOut, readOnly, rows, zoom} = this.props;
     const isSmallestZoom = zoom === 1;
     const isLargestZoom = zoom === 5;
     return (
       <nav>
         <div className="nav-wrapper design-heading blue-grey lighten-2">
-          <DesignName name={name} onNameChange={onNameChange} />
+          <DesignName name={name} onNameChange={onNameChange} readOnly={readOnly} />
           <ul className="right hide-on-med-and-down">
             <li className={isSmallestZoom ? 'disabled' : null}>
               <a href="#!" onClick={isSmallestZoom ? undefined : onZoomOut}>
@@ -41,6 +42,7 @@ const DesignHeading = React.createClass({
                 defaultValue={defaultRows}
                 desc="rows"
                 onAxisChange={onRowsChange}
+                readOnly={readOnly}
                 value={rows}
               />
             </li>
@@ -49,6 +51,7 @@ const DesignHeading = React.createClass({
                 defaultValue={defaultCols}
                 desc="columns"
                 onAxisChange={onColsChange}
+                readOnly={readOnly}
                 value={cols}
               />
             </li>

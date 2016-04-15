@@ -5,6 +5,7 @@ const DesignAxis = React.createClass({
     defaultValue: React.PropTypes.number.isRequired,
     desc: React.PropTypes.string,
     onAxisChange: React.PropTypes.func.isRequired,
+    readOnly: React.PropTypes.bool.isRequired,
     value: React.PropTypes.number.isRequired
   },
 
@@ -43,7 +44,7 @@ const DesignAxis = React.createClass({
   },
 
   render: function() {
-    const {desc} = this.props;
+    const {desc, readOnly} = this.props;
     return (
       <div className="design-axis">
         <input
@@ -51,9 +52,10 @@ const DesignAxis = React.createClass({
           data-delay={desc ? '50' : undefined}
           data-position={desc ? 'bottom' : undefined}
           data-tooltip={desc}
-          onBlur={() => this.handleChange(this.state.value)}
-          onChange={e => this.setState({value: e.target.value})}
-          onKeyUp={this.handleKeyUp}
+          onBlur={readOnly ? undefined : () => this.handleChange(this.state.value)}
+          onChange={readOnly ? undefined : e => this.setState({value: e.target.value})}
+          onKeyUp={readOnly ? undefined : this.handleKeyUp}
+          readOnly={readOnly}
           ref={ref => this.input = ref}
           type="text"
           value={this.state.value}

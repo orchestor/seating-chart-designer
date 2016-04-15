@@ -37,16 +37,19 @@ const DesignCanvas = React.createClass({
   },
 
   render: function() {
-    const {activeType, cols, dispatch, name, rows, spots, zoom} = this.props;
+    const {activeType, cols, dispatch, name, readOnly,
+      rows, spots, zoom} = this.props;
     return (
       <div className="design">
         <div className="design-left">
-          <DesignControls
-            activeType={activeType}
-            onControlClick={type => dispatch(setActiveType(type))}
-            onDoneClick={this.handleDoneClick}
-            onSaveClick={this.handleSaveClick}
-          />
+          {readOnly ? null : (
+            <DesignControls
+              activeType={activeType}
+              onControlClick={type => dispatch(setActiveType(type))}
+              onDoneClick={this.handleDoneClick}
+              onSaveClick={this.handleSaveClick}
+            />
+          )}
         </div>
         <div className="design-right">
           <DesignHeading
@@ -57,11 +60,13 @@ const DesignCanvas = React.createClass({
             onRowsChange={val => dispatch(setRows(parseInt(val, 10)))}
             onZoomIn={() => dispatch(zoomIn())}
             onZoomOut={() => dispatch(zoomOut())}
+            readOnly={readOnly}
             rows={rows}
             zoom={zoom}
           />
           <DesignGrid
             onSpotClick={spotId => dispatch(modifySpot(spotId, activeType))}
+            readOnly={readOnly}
             spots={spots}
             zoom={zoom}
           />
@@ -82,6 +87,7 @@ function mapStateToProps(state) {
     activeType: state.getIn(['settings', 'activeType']).toJS(),
     cols: state.getIn(['design', 'cols']),
     name: state.getIn(['design', 'name']),
+    readOnly: state.getIn(['settings', 'readOnly']),
     rows: state.getIn(['design', 'rows']),
     spots: state.getIn(['design', 'spots']).toJS(),
     zoom: state.getIn(['settings', 'zoom'])

@@ -27,6 +27,7 @@ const spotSizes = {
 const DesignGrid = React.createClass({
   propTypes: {
     onSpotClick: React.PropTypes.func.isRequired,
+    readOnly: React.PropTypes.bool.isRequired,
     spots: React.PropTypes.array.isRequired,
     zoom: React.PropTypes.number.isRequired
   },
@@ -36,7 +37,7 @@ const DesignGrid = React.createClass({
   },
 
   render: function() {
-    const {spots, zoom} = this.props;
+    const {readOnly, spots, zoom} = this.props;
     const gridHeight = (
       Math.ceil(spots.length / 2) * spotSizes[zoom].spot +
       Math.floor(spots.length / 2) * spotSizes[zoom].wall
@@ -46,9 +47,13 @@ const DesignGrid = React.createClass({
       Math.floor(spots[0].length / 2) * spotSizes[zoom].wall
     );
     let rowKey = 0;
+    let classes = 'design-grid-container';
+    if (readOnly) {
+      classes += ' is-read-only';
+    }
     return (
       <div
-        className="design-grid-container"
+        className={classes}
         style={{
           // window height minus nav height
           height: $(window).height() - 64 + 'px',
@@ -68,7 +73,7 @@ const DesignGrid = React.createClass({
               {row.map(col => (
                 <DesignSpot
                   key={col.id.str}
-                  onSpotClick={() => this.handleSpotClick(col.id)}
+                  onSpotClick={readOnly ? undefined : () => this.handleSpotClick(col.id)}
                   spot={col}
                 />
               ))}
