@@ -26,12 +26,14 @@ const DesignControls = React.createClass({
       <div className="design-controls">
         {readOnly ? (
           <ul>
-            <li>
+            {/*
+              <li>
               <a
                 className="waves-effect waves-light btn light-blue"
                 onClick={onRerunClick}
               >{'Rerun'}</a>
             </li>
+            */}
             <li>
               <a
                 className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2"
