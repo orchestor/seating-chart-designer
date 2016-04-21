@@ -74,6 +74,7 @@ const DesignGrid = React.createClass({
                 <DesignSpot
                   key={col.id.str}
                   onSpotClick={readOnly ? undefined : () => this.handleSpotClick(col.id)}
+                  readOnly={readOnly}
                   spot={col}
                 />
               ))}

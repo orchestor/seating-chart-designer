@@ -24,6 +24,35 @@ const DesignSpot = React.createClass({
     }
   },
 
+  renderIcon: function() {
+    const {readOnly, spot} = this.props;
+    const hasIcon = spotNotEmpty(spot.type.id);
+    const hasUser = spot.userId !== null && hasIcon;
+
+    if (readOnly) {
+      if (hasUser) {
+        return (
+          <i className="material-icons user-icon blue-grey-text text-darken-3">
+            {'face'}
+          </i>
+        );
+      }
+      if (spot.type.id === 'DESK') {
+        return (
+          <i className="material-icons spot-type-icon blue-grey-text text-lighten-4">
+            {spot.type.icon}
+          </i>
+        );
+      }
+    }
+
+    return (
+      <i className="material-icons spot-type-icon" style={{color: spot.type.color}}>
+        {spot.type.icon}
+      </i>
+    );
+  },
+
   render: function() {
     const {onSpotClick, spot} = this.props;
     const hasIcon = spotNotEmpty(spot.type.id);
@@ -46,15 +75,7 @@ const DesignSpot = React.createClass({
         onClick={spot.type.id === 'JUNCTION' ? undefined : onSpotClick}
         ref={ref => this.spot = ref}
       >
-        {hasUser && hasIcon ? (
-          <i className="material-icons user-icon">
-            {'face'}
-          </i>
-        ) : hasIcon ? (
-          <i className="material-icons spot-type-icon" style={{color: spot.type.color}}>
-            {spot.type.icon}
-          </i>
-        ) : null}
+        {this.renderIcon()}
       </div>
     );
   }
