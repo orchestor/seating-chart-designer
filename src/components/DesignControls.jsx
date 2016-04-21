@@ -9,6 +9,7 @@ const DesignControls = React.createClass({
     onControlClick: React.PropTypes.func.isRequired,
     onDoneClick: React.PropTypes.func.isRequired,
     onExitClick: React.PropTypes.func.isRequired,
+    onRerunClick: React.PropTypes.func.isRequired,
     onSaveClick: React.PropTypes.func.isRequired,
     readOnly: React.PropTypes.bool.isRequired
   },
@@ -20,11 +21,17 @@ const DesignControls = React.createClass({
   },
 
   render: function() {
-    const {activeType, onControlClick, onDoneClick, onExitClick, onSaveClick, readOnly} = this.props;
+    const {activeType, onControlClick, onDoneClick, onExitClick, onRerunClick, onSaveClick, readOnly} = this.props;
     return (
       <div className="design-controls">
         {readOnly ? (
           <ul>
+            <li>
+              <a
+                className="waves-effect waves-light btn light-blue"
+                onClick={onRerunClick}
+              >{'Rerun'}</a>
+            </li>
             <li>
               <a
                 className="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2"

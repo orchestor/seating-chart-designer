@@ -138,6 +138,7 @@
   cursor: pointer;
   float: left;
   text-align: center;
+  position: relative;
 }
 
 .design-spot[data-type="JUNCTION"] {
@@ -155,6 +156,17 @@
 
 .design-spot[data-type="WALL"].is-present {
   background-color: $blue-grey-base;
+}
+
+.design-spot.has-user > .spot-type-icon {
+  opacity: .25;
+}
+
+.design-spot.has-user > .user-icon {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* spot size - 1 */

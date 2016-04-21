@@ -147,3 +147,7 @@ export function setSpotType(spot, type) {
     spot.type = type;
   }
 }
+
+export function spotNotEmpty(typeId) {
+  return ['EMPTY', 'JUNCTION', 'WALL'].indexOf(typeId) === -1;
+}

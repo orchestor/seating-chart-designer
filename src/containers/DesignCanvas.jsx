@@ -31,7 +31,13 @@ const DesignCanvas = React.createClass({
     if (_.has(window, ['ISC', 'onExit'])) {
       return window.ISC.onExit();
     }
-    console.log('window.ISC.onExit()');
+  },
+
+  handleRerunClick: function(e) {
+    e.preventDefault();
+    if (_.has(window, ['ISC', 'onRerun'])) {
+      return window.ISC.onRerun();
+    }
   },
 
   handleSaveClick: function(e) {
@@ -41,7 +47,6 @@ const DesignCanvas = React.createClass({
     if (_.has(window, ['ISC', 'onSave'])) {
       return window.ISC.onSave(newDesign);
     }
-    console.log('window.ISC.onSave(newDesign)', newDesign);
   },
 
   render: function() {
@@ -55,6 +60,7 @@ const DesignCanvas = React.createClass({
             onControlClick={type => dispatch(setActiveType(type))}
             onDoneClick={this.handleDoneClick}
             onExitClick={this.handleExitClick}
+            onRerunClick={this.handleRerunClick}
             onSaveClick={this.handleSaveClick}
             readOnly={readOnly}
           />
